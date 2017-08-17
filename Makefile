@@ -25,6 +25,8 @@ build-windows: bin/terraform-provider-sakuracloud_windows-386.zip bin/terraform-
 
 build-linux: bin/terraform-provider-sakuracloud_linux-386.zip bin/terraform-provider-sakuracloud_linux-amd64.zip
 
+build-freebsd: bin/terraform-provider-sakuracloud_freebsd-amd64.zip
+
 bin/terraform-provider-sakuracloud_darwin-386.zip:
 	OS="darwin"  ARCH="386"   ARCHIVE=1 BUILD_LDFLAGS=$(BUILD_LDFLAGS) sh -c "'$(CURDIR)/scripts/build.sh'"
 
@@ -42,6 +44,9 @@ bin/terraform-provider-sakuracloud_linux-386.zip:
 
 bin/terraform-provider-sakuracloud_linux-amd64.zip:
 	OS="linux"   ARCH="amd64" ARCHIVE=1 BUILD_LDFLAGS=$(BUILD_LDFLAGS) sh -c "'$(CURDIR)/scripts/build.sh'"
+
+bin/terraform-provider-sakuracloud_freebsd-amd64.zip:
+	OS="freebsd"   ARCH="amd64" ARCHIVE=1 BUILD_LDFLAGS=$(BUILD_LDFLAGS) sh -c "'$(CURDIR)/scripts/build.sh'"
 
 test: vet lint-docs
 	TF_ACC= go test $(TEST1) $(TESTARGS) -timeout=30s -parallel=4 ; \
